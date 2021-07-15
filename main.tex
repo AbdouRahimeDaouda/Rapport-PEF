@@ -1,0 +1,87 @@
+%\documentclass[pfe]{./tpl/isipfe}
+\documentclass[12pt]{tpl/isipfe}
+\graphicspath{{./img/}}
+
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\input{./tpl/new_commands}
+
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{appendix}
+\usepackage{hyperref}
+
+\makeatletter
+    
+\titlecontents{chapter}%
+    [0em]% 
+    {\addvspace{2em}}%
+    {\bfseries\@chapapp\ \thecontentslabel:\quad}% 
+    {\hspace{-0em}}% 
+    {\hfill\contentspage}% 
+    [\addvspace{0pt}]% 
+    
+% the command `\makeindex` is mandatory to create the index file main.idx
+% https://tex.stackexchange.com/questions/9913/input-index-file-not-found
+\makeindex
+
+\begin{document}
+    \input{global_config}
+    
+    \frontmatter
+        \input{tpl/cover_page}
+        \include{tpl/cover_page_black}
+        \input{tpl/signatures}
+        
+        \setcounter{page}{1}
+        \input{dedicaces}
+        \thispagestyle{frontmatter}
+        \input{remerciement}
+        \thispagestyle{frontmatter}
+        
+        \setcounter{secnumdepth}{4}
+        \setcounter{tocdepth}{4}
+        \dominitoc
+        \tableofcontents
+        \adjustmtc
+        \thispagestyle{frontmatter}
+        
+        \listoffigures
+        \thispagestyle{frontmatter}
+        \listoftables
+        \thispagestyle{frontmatter}
+        
+        
+    
+    \mainmatter
+        \include{introduction}
+        \clearpage
+        
+        \input{chap_01}
+        \clearpage
+        
+        \input{chap_02}
+        \clearpage
+        
+        \input{chap_03}
+        \clearpage
+        
+        \input{chap_04}
+        \clearpage
+        
+        \input{conclusion}
+        \clearpage
+        
+		% the command `\nocite{*}` is mandatory to avoid the “no \citation commands” error
+        % https://tex.stackexchange.com/questions/18045/problem-with-compiling-bibtex-no-citation-commands-error
+        %\nocite{*}
+        \printbibliography[heading=bibintoc]
+        
+        \input{tpl/annexes.tex}
+        \clearpage
+        \newpage
+
+        \backmatter
+        \input{./tpl/resume}
+        
+\end{document}
